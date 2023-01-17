@@ -1,0 +1,66 @@
+:root { 
+    --primary-background: #1f242e;
+    --primary-font-color: #ffffff;
+    --secondary-font-color: #ced4da;
+    --title-background-color: #2f343d;
+    --filter-background-color: #2f343d;
+    --filter-title-background: #4c525f;
+    --blue-color: #6a99f0;
+    --button-hover: rgb(59 130 246 / 0.5);
+}
+
+body {
+    background-color: var(--primary-background);
+    color: var(--primary-font-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+.login-form{
+    z-index: 2;
+}
+
+.form-field {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--primary-background);
+    color: var(--primary-font-color);
+    width:250px;
+    text-align:center;
+  }
+
+#username{
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--title-background-color);
+    color: white;
+}
+
+#password{
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--title-background-color);
+    color: white;
+}
+
+input[type="submit"] {
+    background-color: #00cc66;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;  
+    width:100px;
+    margin:10px auto;
+    display:block;
+    }
+
+input[type="submit"]:hover {
+  background-color: #009933;
+}

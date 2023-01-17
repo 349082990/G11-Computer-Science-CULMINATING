@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Vincent's Password Manager</title>
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+    </head>
+    <body>
+        <div class="login-form">
+            <div class="form-field">
+                <label for="username">Username:</label>
+                <br>
+                <input type="text" id="username" name="username">
+                <br><br>
+                <label for="password">Password:</label>
+                <br>
+                <input type="password" id="password" name="password">
+                <br><br>
+                <input type="submit" value="Log in" onclick="login();">
+            </div>
+        </div>
+
+        <div hidden="true" class="password-manager">
+            <h1 id="manager-title">Vincent's Password Manager</h1>
+        </div>
+
+        <script src="scripts/main.js"></script>
+    </body>
+</html>
