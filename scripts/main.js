@@ -2,6 +2,9 @@
 const LOGIN_PAGE = document.getElementById("login-form");
 const MANAGER_PAGE = document.getElementById("password-manager");
 
+// Global variables for tracking
+let currentUser = null;
+
 // Constants for login credentials. This is put into an object data type
 const LOGINS = {
     guest: {    // Guest login credentials
@@ -32,7 +35,7 @@ function login(){
         }
     }
 
-    // If the login is valid, then remove thelogin screen and display 
+    // If the login is valid, then remove the login screen and display 
     if (currentUser){
         LOGIN_PAGE.style.display = "none";
         MANAGER_PAGE.hidden = false;

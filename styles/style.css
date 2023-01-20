@@ -18,8 +18,12 @@ body {
     height: 100vh;
   }
   
-.login-form{
+#login-form{
     z-index: 2;
+}
+
+#password-manager{
+  z-index: 1;
 }
 
 .form-field {
