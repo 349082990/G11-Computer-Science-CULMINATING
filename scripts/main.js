@@ -39,10 +39,18 @@ function login(){
     if (currentUser){
         LOGIN_PAGE.style.display = "none";
         MANAGER_PAGE.hidden = false;
+        console.log(currentUser);
     }
 
     // Alert the user if their login is invalid
     else{
         alert("Invalid Login! Please try again!");
+    }
+}
+
+// Function to display webpage according to the current user
+function displayPage(){
+    if (currentUser === "guest"){
+        
     }
 }
