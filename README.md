@@ -1,5 +1,4 @@
 # G11-Computer-Science-CULMINATING
-Password Manager Website
 
 Secure storage: The website should use strong encryption to protect the user's passwords and store them on a secure server.
 
