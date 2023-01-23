@@ -12,18 +12,14 @@
 body {
     background-color: var(--primary-background);
     color: var(--primary-font-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
   }
   
 #login-form{
     z-index: 2;
-}
-
-#password-manager{
-  z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .form-field {
@@ -71,4 +67,22 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: rgb(169, 189, 223);
+}
+
+
+/* Database Page */
+
+#password-manager{
+  z-index: 1;
+  background-color: var(--title-background-color);
+  position: relative;
+
+}
+
+#manager-title{
+  display: flex;
+  margin-left: 10vw;
+  font-size: 28;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  padding: 10.500px;
 }
