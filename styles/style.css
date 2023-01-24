@@ -86,3 +86,14 @@ input[type="submit"]:hover {
   font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   padding: 10.500px;
 }
+
+/* Monster Chart */
+table {
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+th, td {
+  border: 1px solid black; 
+  padding: 8px; 
+}

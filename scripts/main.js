@@ -2,8 +2,30 @@
 const LOGIN_PAGE = document.getElementById("login-form");
 const MANAGER_PAGE = document.getElementById("password-manager");
 
+// Constant for password chart div
+PASSWORD_CHART = document.getElementById("password-table");
+
 // Global variables for tracking
 let currentUser = null;
+let currentArray = null;
+
+// Create an array to store the data for credentials. Starts off with 5 credentials
+let credentials = [
+    {site: "Google", username: "349082990@gapps.yrdsb.ca", password: 123456},
+    {site: "Microsoft", username: "mrhsiung@gmail.com", password: "computerscience"},
+    {site: "Vincent's Password Manager", username: "Vincent", password: "Vincent"},
+    {site: "Mehmet.com", username: "Mehmet", password: "tottenhamspurs"},
+    {site: "roblox.com", username: "OG_eren", password: "robloxgrandmaster"}
+];
+
+// Create an array to store the data for credentials under guest username
+let guestCredentials = credentials;
+
+// Create an array to store the data for credentials under the vincent username
+let vincentCredentials = credentials;
+
+// Create an array to store the data for credentials under the jeremy username
+let hsiungCredentials = credentials;
 
 // Constants for login credentials. This is put into an object data type
 const LOGINS = {
@@ -36,10 +58,19 @@ function login(){
     }
 
     // If the login is valid, then remove the login screen and display 
+    // Update the current array depending on who the current user is
     if (currentUser){
-        LOGIN_PAGE.style.display = "none";
-        MANAGER_PAGE.hidden = false;
-        console.log(currentUser);
+        if(currentUser === "guest"){
+            currentArray = guestCredentials;
+        }
+        else if (currentUser === "vincent"){
+            currentArray = vincentCredentials;
+        }
+        else if (currentUser === "jeremy"){
+            currentArray = hsiungCredentials;
+        }
+        // Display the page
+        displayPage();
     }
 
     // Alert the user if their login is invalid
@@ -50,7 +81,32 @@ function login(){
 
 // Function to display webpage according to the current user
 function displayPage(){
-    if (currentUser === "guest"){
-        
+    LOGIN_PAGE.style.display = "none";
+    MANAGER_PAGE.hidden = false;
+    displaySites(currentArray);
+}
+
+// This function will display the pre-inputted passwords
+function displaySites(array){
+    // update currentArray to store the current array being viewed
+    currentArray = array;
+    // Set credentialsChart variable to nothing
+    let credentialsChart;
+
+    // Display all the credentials in the array
+    for (const credentials in currentArray){
+        credentialsChart += `<tr><td>${credentials.site}<br>${credentials.username}</td>`;
     }
+
+    // Update the HTML of the monster list 
+    PASSWORD_CHART.innerHTML = credentialsChart;
+}
+
+
+// Function that is basically the same as the built-in "push" function, since we cannot use built-in functions. It pushes an element to the end of an array
+function push(array, element){
+    // The first parameter 'array' is the array to which the element will be added
+    // The second parameter 'element' is the element to be added to the array
+    // Assign the element to the next index position of the array, which is the current length of the array
+    array[array.length] = element;
 }
