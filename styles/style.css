@@ -76,7 +76,6 @@ input[type="submit"]:hover {
   z-index: 1;
   background-color: var(--title-background-color);
   position: relative;
-
 }
 
 #manager-title{
@@ -88,7 +87,7 @@ input[type="submit"]:hover {
 }
 
 /* Monster Chart */
-table {
+table.password-table {
   width: 100%; 
   border-collapse: collapse; 
 }

@@ -89,12 +89,12 @@ function displayPage(){
 // This function will display the pre-inputted passwords
 function displaySites(array){
     // update currentArray to store the current array being viewed
-    currentArray = array;
-    // Set credentialsChart variable to nothing
-    let credentialsChart;
+    array = currentArray;
+    // Set credentialsChart as an empty variable
+    let credentialsChart = "";
 
     // Display all the credentials in the array
-    for (const credentials in currentArray){
+    for (const credentials of array){
         credentialsChart += `<tr><td>${credentials.site}<br>${credentials.username}</td>`;
     }
 
