@@ -94,14 +94,23 @@ function displaySites(array){
     let credentialsChart = "";
 
     // Display all the credentials in the array
-    for (const credentials of array){
-        credentialsChart += `<tr><td>${credentials.site}<br>${credentials.username}</td>`;
+    for (let i = 0; i < array.length; i++){
+        credentialsChart += `<tr id="row-${i}"><td>${array.site}<br>${array.username}</td>`;
     }
 
     // Update the HTML of the monster list 
     PASSWORD_CHART.innerHTML = credentialsChart;
-}
 
+    // Add an event listener to each row of the table that listens for any click events
+    for (let i = 0; i < array.length; i++){
+        let row = document.getElementById(`row-${i}`);
+        ((i))
+        row.addEventListener("click", () => {
+            // Create a pop up that will display when the user clicks on the row
+            alert ("Username: " + array[i].username + "\nPassword: " + array[i].password);    
+        });
+    }
+}
 
 // Function that is basically the same as the built-in "push" function, since we cannot use built-in functions. It pushes an element to the end of an array
 function push(array, element){
