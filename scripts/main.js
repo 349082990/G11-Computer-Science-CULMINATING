@@ -19,6 +19,11 @@ let currentUser = null;
 let currentArray = null;
 let currentFullArray = null;
 
+// Local storage arrays
+let localGuest = [];
+let localVincent = [];
+let localHsiung = [];
+
 // Create an array to store the data for credentials. Starts off with 5 credentials
 let credentials = [
     {site: "Google", username: "349082990@gapps.yrdsb.ca", password: 123456},
@@ -28,25 +33,13 @@ let credentials = [
     {site: "roblox.com", username: "OG_eren (Mehmet's username)", password: "robloxgrandmaster"},
     {site: "yahoo.com", username: "yahoo", password: "com"},
     {site: "website.com", username: "username", password: "password"}
-];
-
-// Create an array to store the data for credentials under guest username
-let guestCredentials = credentials;
-
-// Create an array to store the data for credentials under the vincent username
-let vincentCredentials = credentials;
-
-// Create an array to store the data for credentials under the jeremy username
-let hsiungCredentials = credentials;
-
-// Create an array to store checked data
-let checkedCredentials = [];    
+]; 
 
 // Constants for login credentials. This is put into an object data type
 const LOGINS = {
     guest: {    // Guest login credentials
-        username: "", 
-        password: ""
+        username: "guest", 
+        password: "1234"
     },
     vincent: {  // my login credentials
         username: "vincent",
@@ -76,16 +69,29 @@ function login(){
     // Update the current array depending on who the current user is
     if (currentUser){
         if(currentUser === "guest"){
-            currentArray = guestCredentials;
-            currentFullArray = guestCredentials;
+            currentArray = JSON.parse(localStorage.getItem("current"));
+            currentFullArray = JSON.parse(localStorage.getItem("full"));
+            if (currentArray.length < 1 || currentFullArray.length < 1){
+                currentArray = credentials;
+                currentFullArray = credentials;
+            }
         }
-        else if (currentUser === "vincent"){
-            currentArray = vincentCredentials;
-            currentFullArray = vincentCredentials;
+
+        if (currentUser === "vincent"){
+            currentArray = JSON.parse(localStorage.getItem("now"));
+            currentFullArray = JSON.parse(localStorage.getItem("complete"));
+            if (currentArray.length < 1 || currentFullArray.length < 1){
+                currentArray = credentials;
+                currentFullArray = credentials;
+            }
         }
-        else if (currentUser === "jeremy"){
-            currentArray = hsiungCredentials;
-            currentFullArray = hsiungCredentials;
+        if (currentUser === "jeremy"){
+            currentArray = JSON.parse(localStorage.getItem("present"));
+            currentFullArray = JSON.parse(localStorage.getItem("filled"));
+            if (currentArray.length < 1 || currentFullArray.length < 1){
+                currentArray = credentials;
+                currentFullArray = credentials;
+            }
         }
         // Display the page
         displayPage();
@@ -108,6 +114,9 @@ function displayPage(){
 function displaySites(array){
     // Set credentialsChart as an empty variable
     let credentialsChart = "";
+
+    // Create an array to store checked data
+    let checkedCredentials = [];   
 
     // Display all the credentials in the array
     for (let i = 0; i < array.length; i++){
@@ -170,11 +179,11 @@ function addCredentials(){
     let isAdded;
 
     // Iterate through the array
-    for (let i = 0; i < credentials.length; i++){
+    for (let i = 0; i < currentFullArray.length; i++){
         // Check if the element already exists int he array
-        if (credentials[i].site.toLowerCase() === newCredential.site.toLowerCase() && credentials[i].username.toLowerCase() === newCredential.username.toLowerCase() && credentials[i].password.toLowerCase() === newCredential.password.toLowerCase()){
+        if (currentFullArray[i].site.toLowerCase() === newCredential.site.toLowerCase() && currentFullArray[i].username.toLowerCase() === newCredential.username.toLowerCase() && currentFullArray[i].password.toLowerCase() === newCredential.password.toLowerCase()){
             // If it does exist, set the variable of isAdded to the current index and end the loop
-            isAdded = credentials[i];
+            isAdded = currentFullArray[i];
             break;
         }
     }
@@ -185,11 +194,12 @@ function addCredentials(){
     }   
     // Otherwise, add the newcredential to the end of the credentials array and hide the page.
     else{
-        push(credentials, newCredential);
+        push(currentFullArray, newCredential);
         ADD_PAGE.hidden = true;
         // If the current array is equal to the credentials array, then display the current array
-        if (currentArray == credentials){
+        if (currentArray == currentFullArray){
             displaySites(currentArray);
+            
         }
     }
 }
@@ -218,7 +228,7 @@ INPUT.addEventListener("input", () => {
 
 // Function for showing the full array
 function showAll(){
-    currentArray = credentials;
+    currentArray = currentFullArray;
     displaySites(currentArray);
     FAVOURITES.disabled = false;
 }
@@ -295,6 +305,24 @@ function generatePassword() {
     }
     // Display password
     document.getElementById("password-random").innerText = randomPassword;
+}
+
+// Function for logout
+function logout(){
+    if (currentUser === "guest"){
+        localStorage.setItem("current", JSON.stringify(currentArray));
+        localStorage.setItem("full", JSON.stringify(currentFullArray));
+    }
+    else if (currentUser === "vincent"){
+        localStorage.setItem("now", JSON.stringify(currentArray));
+        localStorage.setItem("complete", JSON.stringify(currentFullArray));
+    }
+    else if (currentUser === "jeremy"){
+        localStorage.setItem("present", JSON.stringify(currentArray));
+        localStorage.setItem("filled", JSON.stringify(currentFullArray));
+    }
+    MANAGER_PAGE.hidden = true;
+    LOGIN_PAGE.style.display = "block";
 }
 
 // Function that is basically the same as the built-in "push" function, since we cannot use built-in functions. It pushes an element to the end of an array
