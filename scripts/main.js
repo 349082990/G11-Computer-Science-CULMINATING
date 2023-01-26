@@ -111,6 +111,34 @@ function displaySites(array){
     }
 }
 
+// Function for sorting arrays in alphabetical order
+function sort(array, order){
+    // Use nested for loops to implement the sorting algorithm
+    for (let i = 0; i < array.length; i++){
+        // Start at the next element
+        for (let j = 1 + i; j < array.length; j++){
+            // Store the index as the current site name in the iteration
+            let currentIndexArray = array[i].site.toLowerCase();
+            let nextIndexArray = array[j].site.toLowerCase();
+            
+            // If the is increasing, then use currentIndexArray > nextIndexArray
+            // Otherwise ("decreasing in this case"), use currentIndexArray < nextIndexArray
+            // Although it's not necessry, I used a chaining operator instead of if/else statements to shorten my code (this is something I recently learned).
+            if (order === "increasing" ? currentIndexArray > nextIndexArray : currentIndexArray < nextIndexArray){
+
+                // Compare the current index in the array to the next one
+                // If the current array index  letter is after the next one in the alphabet, then swap the places
+                let temporary = array[i];
+                array[i] = array[j];
+                array[j] = temporary;
+            }
+        }
+    }
+
+    // Call the function display all the login credentials (acts as a refresh)
+    displaySites(array);
+}
+
 // Function that is basically the same as the built-in "push" function, since we cannot use built-in functions. It pushes an element to the end of an array
 function push(array, element){
     // The first parameter 'array' is the array to which the element will be added
