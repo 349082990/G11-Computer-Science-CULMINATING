@@ -42,18 +42,23 @@
                     </button><br><br>
     
                     <button id="sort-alphabetically" onclick= "sort(currentArray, 'increasing');">
-                        <img src= "icons/alpha.png" alt="star-icon" width = "15" height = "15">
+                        <img src= "icons/alpha.png" alt="alpha-icon" width = "15" height = "15">
                         Sort Alphabetically
                     </button><br><br>
     
                     <button id="sort-reverse" onclick="sort(currentArray, 'decreasing');">
-                        <img src="icons/rev.png" alt="star-icon" width = "15" height = "15">
+                        <img src="icons/rev.png" alt="reverse-icon" width = "15" height = "15">
                         Sort Reverse
                     </button><br><br>
 
                     <button id="add-credentials-button" onclick="displayCredentials();">
-                        <img src="icons/plus.png" alt="star-icon" width = "15" height = "15">
+                        <img src="icons/plus.png" alt="add-icon" width = "15" height = "15">
                         Add Credentials
+                    </button><br><br>
+
+                    <button onclick="displayPasswordGenerator();">
+                        <img src="icons/random.png" alt="random-icon" width = "15" height = "15">
+                        Generate Password
                     </button>
                 </div>
             </div>
@@ -61,7 +66,7 @@
 
         <div hidden="true" id="add-credentials">
             <form>
-                <label for="site">Site: </label><br>
+                <label for="site" id="site-label">Site: </label><br>
                 <input type="text" id="site"><br>
 
                 <label for="name">Username: </label><br>
@@ -74,6 +79,17 @@
             </form>
         </div>
 
+        <div hidden="true" id="random-password">
+            <label for="min-length">Minimum Password Length: </label><br>
+            <input type="number" id="min-length" min="1"><br><br>
+
+            <label for="max-length">Maximum Password Length:</label><br>
+            <input type="number" id="max-length" min="1"><br><br>
+
+            <label for="password">Generated Password: </label>
+            <button onclick="generatePassword();">Generate</button><br><br>
+            <p id="password-random"></p>
+        </div>
         <script src="scripts/main.js"></script>
     </body>
 </html>

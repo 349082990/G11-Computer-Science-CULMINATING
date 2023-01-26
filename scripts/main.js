@@ -3,8 +3,9 @@ const LOGIN_PAGE = document.getElementById("login-form");
 const MANAGER_PAGE = document.getElementById("password-manager");
 const ADD_PAGE = document.getElementById("add-credentials");
 
-// Constant for password chart div
+// Constant for divs
 const PASSWORD_CHART = document.getElementById("password-table");
+const PASSWORD_GENERATOR = document.getElementById("random-password");
 
 // Constants for buttons
 const LOGIN_BUTTON = document.getElementById("login-button");
@@ -23,7 +24,9 @@ let credentials = [
     {site: "Microsoft", username: "mrhsiung@gmail.com", password: "computerscience"},
     {site: "Vincent's Password Manager", username: "Vincent", password: "Vincent"},
     {site: "Mehmet.com", username: "Mehmet", password: "tottenhamspurs"},
-    {site: "roblox.com", username: "OG_eren (Mehmet's username)", password: "robloxgrandmaster"}
+    {site: "roblox.com", username: "OG_eren (Mehmet's username)", password: "robloxgrandmaster"},
+    {site: "yahoo.com", username: "yahoo", password: "com"},
+    {site: "website.com", username: "username", password: "password"}
 ];
 
 // Create an array to store the data for credentials under guest username
@@ -57,12 +60,12 @@ const LOGINS = {
 // Function to handle the login of the website
 function login(){
     // Get the username and password in lowercase values from the textbox. Logins are not case sensitive
-    const username = document.getElementById("username").value.toLowerCase();
-    const password = document.getElementById("password").value.toLowerCase();
+    const USERNAME = document.getElementById("username").value.toLowerCase();
+    const PASSWORD = document.getElementById("password").value.toLowerCase();
 
     // Check if the user and password match the correct values
     for (const user in LOGINS){
-        if(LOGINS[user].username === username && LOGINS[user].password === password){
+        if(LOGINS[user].username === USERNAME && LOGINS[user].password === PASSWORD){
             currentUser = user;
             break;
         }
@@ -120,7 +123,9 @@ function displaySites(array){
             alert ("Username: " + array[i].username + "\nPassword: " + array[i].password);    
         });
 
+        // Add event listener to trakc changes in checkbox
         checkbox.addEventListener("change", () => {
+            //  Checks if checkbox is checked
             if (checkbox.checked){
 
                 // Check if the element already exists in the array
@@ -131,6 +136,7 @@ function displaySites(array){
                     push(checkedCredentials, array[i]); 
                 }
             }
+            // Otheriwse, remove the index from the array
             else{
                 let index = checkedCredentials.indexOf(i);
                     if(index > -1){
@@ -141,12 +147,14 @@ function displaySites(array){
     }
 }
 
+// Function for displaying the add page
 function displayCredentials(){
     ADD_PAGE.hidden = false;
 }
 // Function for adding credentials to the password manager
 function addCredentials(){
     // Get the values for the new credentials from inputs
+    // Constants lower case here, otherwise it wouldn't work (for my syntax)
     const site = document.getElementById("site").value;
     const username = document.getElementById("name").value;
     const password = document.getElementById("pass").value;
@@ -161,22 +169,26 @@ function addCredentials(){
     for (let i = 0; i < credentials.length; i++){
         // Check if the element already exists int he array
         if (credentials[i].site.toLowerCase() === newCredential.site.toLowerCase() && credentials[i].username.toLowerCase() === newCredential.username.toLowerCase() && credentials[i].password.toLowerCase() === newCredential.password.toLowerCase()){
+            // If it does exist, set the variable of isAdded to the current index and end the loop
             isAdded = credentials[i];
             break;
         }
     }
+    // If isAdded is true or any of the values are 0, then alert Invalid and hide the page
     if (isAdded || site.length === 0 || username.length ===  0 || password  .length === 0){
         alert("Invalid");
         ADD_PAGE.hidden = true;
     }   
+    // Otherwise, add the newcredential to the end of the credentials array and hide the page.
     else{
         push(credentials, newCredential);
-        currentArray = credentials;
-        displaySites(currentArray);
         ADD_PAGE.hidden = true;
+        // If the current array is equal to the credentials array, then display the current array
+        if (currentArray == credentials){
+            displaySites(currentArray);
+        }
     }
 }
-
 // Function for partial search
 function search(){
     // Get input value
@@ -193,8 +205,6 @@ function search(){
     }
     // Display the current array
     displaySites(matchArray);
-    console.log(matchArray);
-    console.log(currentArray);
 }
 
 // Event listener to call search function
@@ -216,7 +226,7 @@ function addFavourites(){
     FAVOURITES.disabled = true;
 }
 
-// Function for sorting arrays in alphabetical order
+// Function for sorting arrays in alphabetical order (technically 2 algorithms here)
 function sort(array, order){
     // Use nested for loops to implement the sorting algorithm
     for (let i = 0; i < array.length; i++){
@@ -242,6 +252,43 @@ function sort(array, order){
 
     // Call the function display all the login credentials (acts as a refresh)
     displaySites(array);
+}
+
+// Function to display password generator
+function displayPasswordGenerator(){
+    PASSWORD_GENERATOR.hidden = false;
+}
+
+// Function to generate random password
+function generatePassword() {
+    // Get the minimum and maximum length from the input
+    const MINIMUM = Number(document.getElementById("min-length").value);
+    const MAXIMUM = Number(document.getElementById("max-length").value);
+
+    // Check to see if the minimum length is equal to the maximum length
+    if (MINIMUM > MAXIMUM || isNaN(MINIMUM) || isNaN(MAXIMUM) || MINIMUM <= 0 || MAXIMUM <= 0){
+        alert("Invalid!");
+        return;
+    }
+
+    // Create a string for all possible characters that can be used for the password
+    let characters = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()-_=+`~[];:/?.>,<|";
+
+    // Create an empty string that stores the password
+    let randomPassword = "";
+
+    // Get the random length for the password, which would be between the min and max
+    let randomLength = Math.floor(Math.random() * (MAXIMUM - MINIMUM + 1)) + MINIMUM;
+
+    // Use a while loop to add the randomc haracters to the password until it reaches the randomLength
+    while (randomPassword.length < randomLength){
+        // Get a random index from the characters string
+        let randomIndex = Math.floor(Math.random() * characters.length);
+        // Add the character to the password
+        randomPassword += characters[randomIndex];
+    }
+    // Display password
+    document.getElementById("password-random").innerText = randomPassword;
 }
 
 // Function that is basically the same as the built-in "push" function, since we cannot use built-in functions. It pushes an element to the end of an array

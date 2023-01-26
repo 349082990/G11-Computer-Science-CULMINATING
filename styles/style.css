@@ -153,11 +153,15 @@ tr:hover {
 #add-credentials{
   background-color: var(--primary-background);
   color: var(--primary-font-color);
-  left: 50vh;
-  top: 50vh;
   z-index: 3;
 
   position: absolute;
   border-radius: 5px;
   border: 1px solid #6c757d;
+  left: 45%;
+  top: 30%;
+  
+  align-items: center;
+  text-align: center;
 }
+
