@@ -14,7 +14,7 @@
                 <br>
                 <input type="password" id="password" name="password">
                 <br><br>
-                <input type="submit" value="Log in" onclick="login();">
+                <input id="login-button" type="submit" value="Log in" onclick="login();">
             </div>
         </div>
 
@@ -31,27 +31,47 @@
                 <input type="text" id="filter-input" placeholder="Search Credentials"><br><br><br>
 
                 <div class="buttons">
-                    <button id="all-items">
+                    <button id="all-items" onclick = "showAll();">
                         <img src="icons/all.png" alt="all-icon" width ="15" height = "15">
                         All Items
                     </button><br><br>
     
-                    <button id="favourite-items">
+                    <button id="favourite-items" onclick="addFavourites();">
                         <img src="icons/star.png" alt="star-icon" width = "15" height = "15">
                         Favourites
                     </button><br><br>
     
-                    <button id="sort-alphabetically" onclick= "sort(credentials, 'increasing');">
+                    <button id="sort-alphabetically" onclick= "sort(currentArray, 'increasing');">
                         <img src= "icons/alpha.png" alt="star-icon" width = "15" height = "15">
                         Sort Alphabetically
                     </button><br><br>
     
-                    <button id="sort-reverse" onclick="sort(credentials, 'decreasing');">
+                    <button id="sort-reverse" onclick="sort(currentArray, 'decreasing');">
                         <img src="icons/rev.png" alt="star-icon" width = "15" height = "15">
                         Sort Reverse
-                    </button><br>
+                    </button><br><br>
+
+                    <button id="add-credentials-button" onclick="displayCredentials();">
+                        <img src="icons/plus.png" alt="star-icon" width = "15" height = "15">
+                        Add Credentials
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <div hidden="true" id="add-credentials">
+            <form>
+                <label for="site">Site: </label><br>
+                <input type="text" id="site"><br>
+
+                <label for="username">Username: </label><br>
+                <input type="text" id="username"><br>
+
+                <label for="password">PasswordL </label><br>
+                <input type="text" id="password"><br>
+
+                <input type="button" id="add" value="Add" onclick="addCredentials();"
+            </form>
         </div>
 
         <script src="scripts/main.js"></script>
