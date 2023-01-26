@@ -96,8 +96,8 @@ input[type="submit"]:hover {
 
 /* Monster Chart */
 table.password-table {
-  margin-top: 5vh;
-  width: 30vw; 
+  margin-top: 7vh;
+  width: 30vw;
   border-collapse: collapse; 
 }
 
@@ -127,7 +127,7 @@ tr:hover {
   background-color: var(--title-background-color);
   border-radius: 5px;
   border: 1px solid #6c757d;
-  height: 50vh;
+  height: 54vh;
   width: 250px;
 
   text-align: center;
@@ -151,15 +151,17 @@ tr:hover {
 }
 
 #add-credentials{
-  background-color: var(--primary-background);
+  background-color: var(--filter-background-color);
   color: var(--primary-font-color);
   z-index: 3;
 
-  position: absolute;
+  position: relative;
+  width: 15vw;
+
   border-radius: 5px;
   border: 1px solid #6c757d;
-  left: 45%;
-  top: 30%;
+  margin-top: 8vh;
+  margin-left: 2vw;
   
   align-items: center;
   text-align: center;
