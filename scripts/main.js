@@ -4,12 +4,14 @@ const MANAGER_PAGE = document.getElementById("password-manager");
 const ADD_PAGE = document.getElementById("add-credentials");
 
 // Constant for password chart div
-PASSWORD_CHART = document.getElementById("password-table");
+const PASSWORD_CHART = document.getElementById("password-table");
 
 // Constants for buttons
-LOGIN_BUTTON = document.getElementById("login-button");
-FAVOURITES = document.getElementById("favourite-items");
+const LOGIN_BUTTON = document.getElementById("login-button");
+const FAVOURITES = document.getElementById("favourite-items");
 
+// Constant for search input
+const INPUT = document.getElementById("filter-input");
 
 // Global variables for tracking
 let currentUser = null;
@@ -97,8 +99,6 @@ function displayPage(){
 
 // This function will display the pre-inputted passwords
 function displaySites(array){
-    // update currentArray to store the current array being viewed
-    array = currentArray;
     // Set credentialsChart as an empty variable
     let credentialsChart = "";
 
@@ -137,7 +137,7 @@ function displaySites(array){
                         checkedCredentials.splice(index, 1);
                     }
             }
-        });////
+        });
     }
 }
 
@@ -147,9 +147,9 @@ function displayCredentials(){
 // Function for adding credentials to the password manager
 function addCredentials(){
     // Get the values for the new credentials from inputs
-    const site = String(document.getElementById("site").value);
-    const username = String(document.getElementById("username").value);
-    const password = String(document.getElementById("password").value);
+    const site = document.getElementById("site").value;
+    const username = document.getElementById("name").value;
+    const password = document.getElementById("pass").value;
 
     // Intialize an empty variable for the new object
     const newCredential = {site, username, password};
@@ -160,21 +160,47 @@ function addCredentials(){
     // Iterate through the array
     for (let i = 0; i < credentials.length; i++){
         // Check if the element already exists int he array
-        if (credentials[i].site.toLowerCase() === newCredential.site.toLocaleLowerCase() && credentials[i].username.toLocaleLowerCase() === newCredential.username.toLocaleLowerCase() && credentials[i].password.toLowerCase() === newCredential.password.toLocaleLowerCase()){
+        if (credentials[i].site.toLowerCase() === newCredential.site.toLowerCase() && credentials[i].username.toLowerCase() === newCredential.username.toLowerCase() && credentials[i].password.toLowerCase() === newCredential.password.toLowerCase()){
             isAdded = credentials[i];
             break;
         }
-        if (isAdded || username.length === 0 || site.length ===  0 || password.length === 0){
-            alert("Invalid");
-        }
-        else{
-            push(credentials, newCredential);
-            currentArray = credentials;
-            displaySites(currentArray);
-        }
-        
+    }
+    if (isAdded || site.length === 0 || username.length ===  0 || password  .length === 0){
+        alert("Invalid");
+        ADD_PAGE.hidden = true;
+    }   
+    else{
+        push(credentials, newCredential);
+        currentArray = credentials;
+        displaySites(currentArray);
+        ADD_PAGE.hidden = true;
     }
 }
+
+// Function for partial search
+function search(){
+    // Get input value
+    let searchInput = INPUT.value;
+    // Initialize an empty array so the search results can be stored
+    let matchArray = [];
+    // Iterate through the current array
+    for (let i = 0; i < currentArray.length; i++){
+        // Check if the input value is a substrnig of any of the usernames, sites, or passwords
+        if (currentArray[i].site.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1){
+            // If yes, then push to the matchingarray array
+            push(matchArray, currentArray[i]);
+        }
+    }
+    // Display the current array
+    displaySites(matchArray);
+    console.log(matchArray);
+    console.log(currentArray);
+}
+
+// Event listener to call search function
+INPUT.addEventListener("input", () => {
+    search();
+});
 
 // Function for showing the full array
 function showAll(){
@@ -225,21 +251,3 @@ function push(array, element){
     // Assign the element to the next index position of the array, which is the current length of the array
     array[array.length] = element;
 }
-
-// // Function to create eventlistener when enter key is pressed (weird name, but it means that it can enter something by pressing enter. I couldn't think of a better name)
-// function enterByEnter(){
-//     // Initialize an element variable and set it to get the element of whatever id is in the parameter
-//     let element = document.getElementById("login-button");
-//     // Run if it fits under a condition
-//     if (LOGIN_PAGE.style.display !== "none"){
-//         // Add event listener under conditons
-//         element.addEventListener("keydown", (event) => {
-//             // Checks to see if the enter key is pressed (keydown). If it is, then a a button with an id is clicked
-//             if (event.code === "Enter"){
-//                 element.click();
-//             }
-//         });
-//     }
-// }
-
-// setInterval(enterByEnter(), 100);
