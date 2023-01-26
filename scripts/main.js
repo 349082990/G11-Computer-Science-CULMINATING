@@ -17,6 +17,7 @@ const INPUT = document.getElementById("filter-input");
 // Global variables for tracking
 let currentUser = null;
 let currentArray = null;
+let currentFullArray = null;
 
 // Create an array to store the data for credentials. Starts off with 5 credentials
 let credentials = [
@@ -76,12 +77,15 @@ function login(){
     if (currentUser){
         if(currentUser === "guest"){
             currentArray = guestCredentials;
+            currentFullArray = guestCredentials;
         }
         else if (currentUser === "vincent"){
             currentArray = vincentCredentials;
+            currentFullArray = vincentCredentials;
         }
         else if (currentUser === "jeremy"){
             currentArray = hsiungCredentials;
+            currentFullArray = hsiungCredentials;
         }
         // Display the page
         displayPage();
@@ -138,7 +142,7 @@ function displaySites(array){
             }
             // Otheriwse, remove the index from the array
             else{
-                let index = checkedCredentials.indexOf(i);
+                let index = checkedCredentials.indexOf(array[i]);
                     if(index > -1){
                         checkedCredentials.splice(index, 1);
                     }
@@ -257,6 +261,8 @@ function sort(array, order){
 // Function to display password generator
 function displayPasswordGenerator(){
     PASSWORD_GENERATOR.hidden = false;
+    // Disable the button
+    document.getElementById("generator-button").disabled = true;
 }
 
 // Function to generate random password

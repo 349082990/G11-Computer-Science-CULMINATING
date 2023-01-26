@@ -56,7 +56,7 @@
                         Add Credentials
                     </button><br><br>
 
-                    <button onclick="displayPasswordGenerator();">
+                    <button id="generator-button" onclick="displayPasswordGenerator();">
                         <img src="icons/random.png" alt="random-icon" width = "15" height = "15">
                         Generate Password
                     </button>
@@ -80,14 +80,15 @@
         </div>
 
         <div hidden="true" id="random-password">
+            <br><br>
             <label for="min-length">Minimum Password Length: </label><br>
             <input type="number" id="min-length" min="1"><br><br>
 
             <label for="max-length">Maximum Password Length:</label><br>
             <input type="number" id="max-length" min="1"><br><br>
 
-            <label for="password">Generated Password: </label>
             <button onclick="generatePassword();">Generate</button><br><br>
+            <label for="password">Generated Password: </label>
             <p id="password-random"></p>
         </div>
         <script src="scripts/main.js"></script>

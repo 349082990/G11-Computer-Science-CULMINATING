@@ -165,3 +165,18 @@ tr:hover {
   text-align: center;
 }
 
+#random-password{
+  background-color: var(--filter-background-color);
+  color: var(--primary-font-color);
+  z-index: 4;
+
+  position: relative;
+  width: 15vw;
+  text-align: center;
+
+  border-radius: 5px;
+  border: 1px solid #6c757d;
+
+  margin-top: 8vh;
+  margin-left: 2vw;
+}
