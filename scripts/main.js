@@ -30,8 +30,8 @@ let hsiungCredentials = credentials;
 // Constants for login credentials. This is put into an object data type
 const LOGINS = {
     guest: {    // Guest login credentials
-        username: "guest", 
-        password: "1234"
+        username: "", 
+        password: ""
     },
     vincent: {  // my login credentials
         username: "vincent",
