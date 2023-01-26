@@ -15,7 +15,7 @@ let credentials = [
     {site: "Microsoft", username: "mrhsiung@gmail.com", password: "computerscience"},
     {site: "Vincent's Password Manager", username: "Vincent", password: "Vincent"},
     {site: "Mehmet.com", username: "Mehmet", password: "tottenhamspurs"},
-    {site: "roblox.com", username: "OG_eren", password: "robloxgrandmaster"}
+    {site: "roblox.com", username: "OG_eren (Mehmet's username)", password: "robloxgrandmaster"}
 ];
 
 // Create an array to store the data for credentials under guest username
@@ -95,7 +95,7 @@ function displaySites(array){
 
     // Display all the credentials in the array
     for (let i = 0; i < array.length; i++){
-        credentialsChart += `<tr id="row-${i}"><td>${array.site}<br>${array.username}</td>`;
+        credentialsChart += `<tr id="row-${i}"><td>${array[i].site}<br>${array[i].username}</td>`;
     }
 
     // Update the HTML of the monster list 
@@ -104,7 +104,6 @@ function displaySites(array){
     // Add an event listener to each row of the table that listens for any click events
     for (let i = 0; i < array.length; i++){
         let row = document.getElementById(`row-${i}`);
-        ((i))
         row.addEventListener("click", () => {
             // Create a pop up that will display when the user clicks on the row
             alert ("Username: " + array[i].username + "\nPassword: " + array[i].password);    

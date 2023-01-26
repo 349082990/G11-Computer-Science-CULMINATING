@@ -1,3 +1,4 @@
+/* Similar CSS visuals as BitWarden */
 :root { 
     --primary-background: #1f242e;
     --primary-font-color: #ffffff;
@@ -7,6 +8,7 @@
     --filter-title-background: #4c525f;
     --blue-color: #6a99f0;
     --button-hover: rgb(59 130 246 / 0.5);
+    --transparent-hover: rgb(255 255 255 / 0.12);
 }
 
 body {
@@ -74,12 +76,17 @@ input[type="submit"]:hover {
 
 #password-manager{
   z-index: 1;
-  background-color: var(--title-background-color);
+  background-color: var(--primary-background);
   position: relative;
 }
 
-#manager-title{
+.top-bar{
+  background-color: var(--title-background-color);
   display: flex;
+}
+
+#manager-title{
+  color: var(--primary-font-color);
   margin-left: 10vw;
   font-size: 28;
   font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -88,11 +95,21 @@ input[type="submit"]:hover {
 
 /* Monster Chart */
 table.password-table {
+  margin-top: 5vh;
   width: 100%; 
   border-collapse: collapse; 
 }
 
+.password-table{
+  flex: 1;
+}
+
 th, td {
-  border: 1px solid black; 
-  padding: 8px; 
+  border-top: 1px solid var(--filter-title-background); 
+  border-bottom: 1px solid var(--filter-title-background); 
+  padding: 12px; 
+}
+
+tr:hover {
+  background-color: var(--transparent-hover);
 }
